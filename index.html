@@ -109,23 +109,18 @@
     .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
 
     /* Buttons */
-    @keyframes shimmer-btn {
-      0%   { background-position: -250% center; }
-      100% { background-position: 250% center; }
+    @keyframes pulse-btn {
+      0%, 100% { box-shadow: 0 0 0px 0px rgba(166, 124, 0, 0); }
+      50%       { box-shadow: 0 0 22px 8px rgba(166, 124, 0, 0.47); }
     }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
-      color: var(--inverse-ink);
+      background: var(--ink); color: var(--inverse-ink);
       font-family: 'Noto Sans JP', sans-serif;
       font-size: 15px; font-weight: 500;
       padding: 13px 28px; border-radius: var(--radius-pill);
       transition: opacity 0.2s; border: none; cursor: pointer;
-      background: linear-gradient(
-        105deg,
-        #000 38%, rgba(166,124,0,0.75) 50%, #000 62%
-      );
-      background-size: 250% auto;
-      animation: shimmer-btn 2.6s linear infinite;
+      animation: pulse-btn 2.8s ease-in-out infinite;
     }
     .btn-primary:hover { opacity: 0.78; animation: none; }
     .btn-secondary {
