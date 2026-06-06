@@ -113,6 +113,10 @@
       0%, 100% { box-shadow: 0 0 0px 0px rgba(166, 124, 0, 0); }
       50%       { box-shadow: 0 0 20px 7px rgba(166, 124, 0, 0.45); }
     }
+    @keyframes pulse-btn-inv {
+      0%, 100% { box-shadow: 0 0 0px 0px rgba(212, 175, 55, 0); }
+      50%       { box-shadow: 0 0 28px 10px rgba(212, 175, 55, 0.65); }
+    }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
       background: var(--ink); color: var(--inverse-ink);
@@ -140,7 +144,7 @@
       font-size: 16px; font-weight: 500;
       padding: 14px 36px; border-radius: var(--radius-pill);
       transition: opacity 0.2s; cursor: pointer;
-      animation: pulse-btn 4s ease-in-out infinite;
+      animation: pulse-btn-inv 4s ease-in-out infinite;
     }
     .btn-inverse:hover { opacity: 0.85; animation: none; }
 
