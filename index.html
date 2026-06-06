@@ -300,22 +300,24 @@
 
     /* ── BENEFITS ── */
     .benefits-cards {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 16px; margin-top: 40px;
+      display: grid; grid-template-columns: 1fr;
+      gap: 12px; margin-top: 40px;
     }
     .benefit-card {
       background: var(--surface-soft);
       border-radius: var(--radius-lg);
       overflow: hidden;
-      display: flex; flex-direction: column;
+      display: flex; flex-direction: row; align-items: stretch;
     }
     .benefit-card-before {
-      padding: 24px 22px 20px; flex: 1;
+      padding: 20px 24px; flex: 1;
+      display: flex; flex-direction: column; justify-content: center;
     }
     .benefit-card-after {
-      padding: 20px 22px 24px; flex: 1;
+      padding: 20px 24px; flex: 1;
       background: rgba(255,255,255,0.7);
-      border-top: 1px solid var(--hairline);
+      border-left: 1px solid var(--hairline);
+      display: flex; flex-direction: column; justify-content: center;
     }
     .benefit-tag {
       font-family: 'JetBrains Mono', monospace;
@@ -370,6 +372,8 @@
       letter-spacing: -0.02em; opacity: 0.2;
       margin-bottom: 16px; line-height: 1;
     }
+    .process-step-img { margin: 12px 0 20px; text-align: center; }
+    .process-step-img img { width: 100%; max-width: 160px; height: 120px; object-fit: contain; }
     .process-step h3 { font-size: 14px; font-weight: 600; margin-bottom: 10px; line-height: 1.5; }
     .process-step p { font-size: 12px; opacity: 0.6; line-height: 1.7; }
 
@@ -489,6 +493,8 @@
       .container { padding: 0 20px; }
       .color-block { margin: 0; border-radius: 0; padding: 48px 0; }
       .features-grid, .problem-grid, .strengths-grid, .benefits-cards { grid-template-columns: 1fr; }
+      .benefit-card { flex-direction: column; }
+      .benefit-card-after { border-left: none; border-top: 1px solid var(--hairline); }
       .pricing-grid { grid-template-columns: 1fr; }
       .process-steps { grid-template-columns: 1fr; gap: 28px; }
       .results-grid { grid-template-columns: 1fr; }
@@ -793,21 +799,25 @@
     <div class="process-steps">
       <div class="process-step fi d1">
         <div class="process-step-num">01</div>
+        <div class="process-step-img"><img src="導入の流れ01.png" alt="無料相談" loading="lazy"></div>
         <h3>無料相談（30分）</h3>
         <p>現状の悩みや業務の課題をオンラインでお聞きします。費用・準備は不要です。</p>
       </div>
       <div class="process-step fi d2">
         <div class="process-step-num">02</div>
+        <div class="process-step-img"><img src="導入の流れ02.png" alt="業務ヒアリング・現状整理" loading="lazy"></div>
         <h3>業務ヒアリング・現状整理</h3>
         <p>業務フローを整理し、AIを活用できる箇所・優先すべき課題を特定します。</p>
       </div>
       <div class="process-step fi d3">
         <div class="process-step-num">03</div>
+        <div class="process-step-img"><img src="導入の流れ03.png" alt="改善プランの提案" loading="lazy"></div>
         <h3>改善プランの提案</h3>
         <p>優先順位をつけた改善計画とAI活用の設計をご提案。納得いただいてから進めます。</p>
       </div>
       <div class="process-step fi d4">
         <div class="process-step-num">04</div>
+        <div class="process-step-img"><img src="導入の流れ04.png" alt="導入・定着支援" loading="lazy"></div>
         <h3>導入・定着支援</h3>
         <p>ツール設定から現場教育まで、「使われ続ける状態」を一緒に作ります。</p>
       </div>
@@ -828,6 +838,7 @@
         <div class="pricing-price">¥0</div>
         <div class="pricing-unit">30分 / オンライン</div>
         <div class="pricing-desc">現状を整理し、どこから改善すべきかを一緒に明確にします。費用・準備は一切不要です。</div>
+        <a href="https://forms.gle/NFJxWhpu8TtR5X5H8" target="_blank" rel="noopener" style="display:block; margin-top:20px; padding:10px 0; background:var(--ink); color:var(--inverse-ink); text-align:center; font-size:12px; font-weight:600; border-radius:6px; text-decoration:none; letter-spacing:0.04em;">申し込む →</a>
       </div>
       <div class="pricing-card fi d2">
         <span class="pricing-label">Spot</span>
@@ -933,6 +944,7 @@
       <p class="testimonial-quote">今まではサイトを渡り歩いて集積していたデータが、短時間で一か所に集まってくるのが画期的です。配布いただいた手順書もとても役立ち、研修後すぐに業務で使い始めることができました。</p>
       <p class="testimonial-meta">chinoさん &nbsp;|&nbsp; コンサルタント（アパレル・飲食・地方創生）&nbsp;|&nbsp; Perplexity 活用研修</p>
     </div>
+    <p class="fi d3" style="margin-top:24px; font-size:12px; opacity:0.4; text-align:center; letter-spacing:0.02em;">※ お客様の声は順次追加予定です</p>
   </div>
 </section>
 
