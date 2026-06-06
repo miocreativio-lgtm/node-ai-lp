@@ -109,6 +109,10 @@
     .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
 
     /* Buttons */
+    @keyframes pulse-btn {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0,0,0,0.18); }
+      60%       { box-shadow: 0 0 0 10px rgba(0,0,0,0); }
+    }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
       background: var(--ink); color: var(--inverse-ink);
@@ -116,8 +120,9 @@
       font-size: 15px; font-weight: 500;
       padding: 13px 28px; border-radius: var(--radius-pill);
       transition: opacity 0.2s; border: none; cursor: pointer;
+      animation: pulse-btn 3s ease-in-out infinite;
     }
-    .btn-primary:hover { opacity: 0.78; }
+    .btn-primary:hover { opacity: 0.78; animation: none; }
     .btn-secondary {
       display: inline-flex; align-items: center; gap: 8px;
       background: var(--canvas); color: var(--ink);
@@ -189,6 +194,12 @@
     #hero {
       min-height: 100vh; display: flex; align-items: center;
       padding: 140px 0 100px;
+      position: relative; overflow: hidden;
+    }
+    #heroCanvas {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
     }
     .hero-h1 {
       font-size: clamp(2.8rem, 7vw, 5.2rem);
@@ -474,7 +485,8 @@
 
 <!-- ① HERO -->
 <section id="hero">
-  <div class="container">
+  <canvas id="heroCanvas"></canvas>
+  <div class="container" style="position:relative;z-index:1;">
     <span class="eyebrow fi">IT担当不在の中小企業経営者の方へ</span>
     <h1 class="hero-h1 fi d1">業務を整理してから、AIを入れる。<br>だから、現場で使われ続ける。</h1>
     <p class="hero-sub fi d2">ChatGPTを導入したのに、結局使われていない——そんな失敗をしないために。業務の無駄を整理し、必要な業務にAIを組み込む。<br>Node AI Partnersは、必要な時に相談できる「社外AI担当」として、現場で使われる状態まで支援します。</p>
@@ -937,6 +949,68 @@
       else io.observe(el);
     });
   });
+
+  // Hero canvas node network
+  (function() {
+    const canvas = document.getElementById('heroCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const NODE_COUNT = 38;
+    const MAX_DIST = 200;
+    let W, H, nodes, raf;
+
+    function resize() {
+      const s = canvas.parentElement;
+      W = canvas.width = s.offsetWidth;
+      H = canvas.height = s.offsetHeight;
+    }
+    function mkNode() {
+      return {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r: Math.random() * 1.8 + 0.8,
+      };
+    }
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const d = Math.sqrt(dx*dx + dy*dy);
+          if (d < MAX_DIST) {
+            ctx.strokeStyle = `rgba(0,0,0,${(1 - d/MAX_DIST) * 0.055})`;
+            ctx.lineWidth = 0.7;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      nodes.forEach(n => {
+        ctx.fillStyle = 'rgba(0,0,0,0.10)';
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+        ctx.fill();
+        n.x += n.vx; n.y += n.vy;
+        if (n.x < 0 || n.x > W) n.vx *= -1;
+        if (n.y < 0 || n.y > H) n.vy *= -1;
+      });
+      raf = requestAnimationFrame(draw);
+    }
+    resize();
+    nodes = Array.from({length: NODE_COUNT}, mkNode);
+    draw();
+    window.addEventListener('resize', () => { resize(); nodes = Array.from({length: NODE_COUNT}, mkNode); });
+    // Pause when hero scrolled out of view
+    new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) { if (!raf) draw(); }
+      else { cancelAnimationFrame(raf); raf = null; }
+    }).observe(canvas);
+  })();
 
   // FAQ accordion
   document.querySelectorAll('.faq-q').forEach(btn => {
