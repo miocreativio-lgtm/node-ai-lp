@@ -1,0 +1,23 @@
+# ===== 秘密情報（最重要・絶対にGitHubへ上げない）=====
+# APIキー・パスワード・送信設定などはこのファイルに書く想定
+.env
+.env.*
+*.key
+*.pem
+secrets.*
+credentials.*
+
+# ===== OS・エディタが勝手に作るゴミファイル =====
+.DS_Store
+.DS_Store?
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# ===== 依存パッケージ（使う場合のみ・再生成できる）=====
+node_modules/
+
+# ===== ログ・一時ファイル =====
+*.log
+*.tmp
