@@ -21,3 +21,6 @@ node_modules/
 # ===== ログ・一時ファイル =====
 *.log
 *.tmp
+
+# ===== Claude Code 設定（ローカルのみ）=====
+.claude/
