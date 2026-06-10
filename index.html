@@ -351,18 +351,58 @@
     .strength-card h3 { font-size: 14px; font-weight: 600; color: var(--inverse-ink); line-height: 1.55; margin-bottom: 10px; }
     .strength-card p { font-size: 13px; color: var(--inverse-ink); opacity: 0.6; line-height: 1.7; }
 
-    /* ── RESULTS ── */
-    .results-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1px; background: var(--hairline);
-      border: 1px solid var(--hairline);
-      border-radius: var(--radius-md); overflow: hidden;
-      margin-top: 48px;
+    /* ── WHY US: profile + credential badges ── */
+    .why-profile {
+      display: flex; align-items: center; gap: 24px;
+      margin-top: 44px; padding: 24px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-md);
     }
-    .result-item { background: var(--canvas); padding: 32px 24px; }
-    .result-item svg { width: 18px; height: 18px; opacity: 0.25; margin-bottom: 12px; stroke-width: 1.5; }
-    .result-item h3 { font-size: 13px; font-weight: 600; line-height: 1.55; margin-bottom: 6px; }
-    .result-item p { font-size: 12px; opacity: 0.45; line-height: 1.6; }
+    .why-avatar {
+      flex-shrink: 0; width: 88px; height: 88px;
+      border-radius: 50%; overflow: hidden;
+      background: #fff;
+      border: 3px solid rgba(255,255,255,0.9);
+    }
+    .why-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 20%;
+    }
+    .why-profile-name { font-size: 15px; font-weight: 600; color: var(--inverse-ink); margin-bottom: 3px; }
+    .why-profile-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 0.04em;
+      color: var(--inverse-ink); opacity: 0.5; margin-bottom: 12px;
+    }
+    .why-profile-msg { font-size: 13px; line-height: 1.75; color: var(--inverse-ink); opacity: 0.72; max-width: 520px; }
+    .cred-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--inverse-ink); opacity: 0.4;
+      display: block; margin: 48px 0 16px;
+    }
+    .cred-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .cred-card {
+      padding: 22px 20px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.03);
+    }
+    .cred-card svg { width: 18px; height: 18px; color: var(--inverse-ink); opacity: 0.4; stroke-width: 1.5; margin-bottom: 12px; display: block; }
+    .cred-card h4 { font-size: 13px; font-weight: 600; color: var(--inverse-ink); line-height: 1.55; }
+    .cred-card p { font-size: 12px; color: var(--inverse-ink); opacity: 0.5; line-height: 1.65; margin-top: 6px; }
+    .cred-card.is-current { background: rgba(220,238,177,0.10); border-color: rgba(220,238,177,0.45); }
+    .cred-card.is-current svg { color: var(--block-lime); opacity: 0.95; }
+    .cred-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em;
+      color: var(--block-navy); background: var(--block-lime);
+      padding: 3px 10px; border-radius: var(--radius-pill); margin-top: 12px;
+    }
+    .cred-tag.done {
+      background: transparent; color: var(--inverse-ink);
+      border: 1px solid rgba(255,255,255,0.25); opacity: 0.7;
+    }
 
     /* ── PROCESS ── */
     .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 48px; }
@@ -489,6 +529,7 @@
     @media (max-width: 960px) {
       .pricing-grid { grid-template-columns: repeat(2, 1fr); }
       .strengths-grid { grid-template-columns: repeat(2, 1fr); }
+      .cred-cards { grid-template-columns: repeat(2, 1fr); }
       .process-steps { grid-template-columns: repeat(2, 1fr); }
       .benefits-cards { grid-template-columns: repeat(2, 1fr); }
       .solution-layout { grid-template-columns: 1fr; gap: 48px; }
@@ -500,12 +541,12 @@
       .nav-hamburger { display: flex; }
       .container { padding: 0 20px; }
       .color-block { margin: 0; border-radius: 0; padding: 48px 0; }
-      .features-grid, .problem-grid, .strengths-grid, .benefits-cards { grid-template-columns: 1fr; }
+      .features-grid, .problem-grid, .strengths-grid, .benefits-cards, .cred-cards { grid-template-columns: 1fr; }
       .benefit-card { flex-direction: column; }
       .benefit-card-after { border-left: none; border-top: 1px solid var(--hairline); }
       .pricing-grid { grid-template-columns: 1fr; }
       .process-steps { grid-template-columns: 1fr; gap: 28px; }
-      .results-grid { grid-template-columns: 1fr; }
+      .why-profile { flex-direction: column; align-items: flex-start; gap: 18px; }
       .benefit-row { grid-template-columns: 1fr; gap: 8px; padding: 18px 0; }
       .benefit-arrow { display: none; }
       .footer-inner { flex-direction: column; gap: 32px; }
@@ -732,11 +773,19 @@
       <span class="eyebrow-inv fi">Why Us</span>
       <h2 class="section-h2 fi d1" style="color:var(--inverse-ink);">現場を知っているから、<br>定着まで支援できる。</h2>
       <p class="section-lead fi d2" style="color:var(--inverse-ink);opacity:0.58;">「導入して終わり」ではなく「使われ続ける」を追求できる理由があります。</p>
+      <div class="why-profile fi d2">
+        <div class="why-avatar"><img src="miho-avatar.png" alt="Node AI Partners 三浦美穂" loading="lazy"></div>
+        <div>
+          <div class="why-profile-name">三浦 美穂</div>
+          <div class="why-profile-role">Node AI Partners ／ AI業務改善コンサルタント</div>
+          <p class="why-profile-msg">ツールより先に、業務を整理する。ITが苦手な方にも現場の言葉で、「使われ続ける」仕組みを一緒に作ります。</p>
+        </div>
+      </div>
       <div class="strengths-grid">
         <div class="strength-card fi d1">
           <span class="strength-num">01</span>
           <h3>社内ITサポート11年 × PC講師6年</h3>
-          <p>技術的な難しい話を、現場の言葉で説明してきた経験があります。ITが苦手な方にも、分かりやすく伝える力が強みです。</p>
+          <p>技術的な難しい話を、現場の言葉で説明してきた経験があります。経営層から現場スタッフまで、ITが苦手な方にも分かりやすく伝える力が強みです。</p>
         </div>
         <div class="strength-card fi d2">
           <span class="strength-num">02</span>
@@ -749,54 +798,23 @@
           <p>実際にAIを使った業務改善・設計を行うための、実践的な知識があります。ツールを語るだけでなく、実務に落とし込む視点で設計・支援します。</p>
         </div>
       </div>
+      <span class="cred-label fi d3">実績・資格</span>
+      <div class="cred-cards fi d3">
+        <div class="cred-card is-current">
+          <i data-lucide="sparkles"></i>
+          <h4>企業の人事部門で、AI（Claude Code）を活用した業務改善を支援</h4>
+          <span class="cred-tag">進行中</span>
+        </div>
+        <div class="cred-card">
+          <i data-lucide="badge-check"></i>
+          <h4>生成AIパスポート</h4>
+          <p>生成AI活用に関する公式資格</p>
+          <span class="cred-tag done">2026.2 取得</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-<!-- ⑦ RESULTS -->
-<section style="background:var(--surface-soft); padding:var(--spacing-section) 0;">
-  <div class="container">
-    <span class="eyebrow fi">Credentials</span>
-    <h2 class="section-h2 fi d1">実績・資格</h2>
-    <div class="results-grid">
-      <div class="result-item fi d1">
-        <i data-lucide="monitor"></i>
-        <h3>社内ITサポート11年<br>PC講師6年</h3>
-        <p>現場でITを浸透させ続けてきた実務経験</p>
-      </div>
-      <div class="result-item fi d2">
-        <i data-lucide="smartphone"></i>
-        <h3>2700台規模<br>IT機器入替PJ</h3>
-        <p>大規模IT導入・定着支援の現場をリード</p>
-      </div>
-      <div class="result-item fi d3">
-        <i data-lucide="shield-check"></i>
-        <h3>VIPサポート<br>経験あり</h3>
-        <p>高品質・高要求な対応の経験</p>
-      </div>
-      <div class="result-item fi d1">
-        <i data-lucide="trending-up"></i>
-        <h3>中小企業向け<br>AI導入・業務改善支援</h3>
-        <p>現場目線でのAI活用設計と定着支援</p>
-      </div>
-      <div class="result-item fi d2">
-        <i data-lucide="graduation-cap"></i>
-        <h3>SHIFT AI<br>学習支援アドバイザー</h3>
-        <p>AI活用の学習支援・教育サポートに携わる</p>
-      </div>
-      <div class="result-item fi d3">
-        <i data-lucide="badge-check"></i>
-        <h3>生成AIパスポート<br>取得</h3>
-        <p>生成AI活用に関する公式資格を取得</p>
-      </div>
-      <div class="result-item fi d1">
-        <i data-lucide="award"></i>
-        <h3>SoftBank主催<br>生成AIハッカソン 3位入賞</h3>
-        <p>実際にAIを使った業務改善・設計を行うための、実践的な知識があります。ツールを語るだけでなく、実務に落とし込む視点で設計・支援します。</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ⑧ PROCESS -->
 <section id="process" style="padding:var(--spacing-section) 0;">
