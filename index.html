@@ -467,7 +467,8 @@
     }
     .pricing-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(255,255,255,0.22); }
     .pricing-btn:active { transform: translateY(0); box-shadow: 0 2px 8px rgba(255,255,255,0.18); }
-    .pricing-btn .arrow { display: inline-block; transition: transform 0.18s ease; }
+    .pricing-btn .arrow { display: inline-flex; align-items: center; vertical-align: middle; margin-left: 6px; transition: transform 0.18s ease; }
+    .pricing-btn .arrow svg { width: 15px; height: 15px; stroke-width: 1.75; }
     .pricing-btn:hover .arrow { transform: translateX(4px); }
     .pricing-note {
       text-align: center; font-size: 11px; opacity: 0.35;
@@ -892,7 +893,7 @@
         <div class="pricing-price">¥0</div>
         <div class="pricing-unit">30分 / オンライン</div>
         <div class="pricing-desc">現状を整理し、どこから改善すべきかを一緒に明確にします。費用・準備は一切不要です。</div>
-        <a href="https://forms.gle/NFJxWhpu8TtR5X5H8" target="_blank" rel="noopener" class="pricing-btn">申し込む <span class="arrow">→</span></a>
+        <a href="https://forms.gle/NFJxWhpu8TtR5X5H8" target="_blank" rel="noopener" class="pricing-btn">申し込む<span class="arrow"><i data-lucide="arrow-right"></i></span></a>
       </div>
       <div class="pricing-card fi d2">
         <span class="pricing-label">Spot</span>
